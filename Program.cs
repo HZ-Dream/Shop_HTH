@@ -1,4 +1,13 @@
+using Microsoft.EntityFrameworkCore;
+using Shop_HTH.Repository;
+
 var builder = WebApplication.CreateBuilder(args);
+
+//Connected sql
+builder.Services.AddDbContext<DataContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration["ConnectionStrings:ConnectedDb"]);
+});
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -19,5 +28,9 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+//seeding data
+var context = app.Services.CreateScope().ServiceProvider.GetRequiredService<DataContext>();
+SeedData.SeedingData(context);
 
 app.Run();
