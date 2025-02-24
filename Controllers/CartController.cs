@@ -6,7 +6,7 @@ namespace Shop_HTH.Controllers
     {
         public IActionResult Index()
         {
-            return View("~/Views/Cart/Index.cshtml");
+            return View();
         }
 
         public IActionResult Checkout()
