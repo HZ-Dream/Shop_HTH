@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Shop_HTH.Models
 {
@@ -16,9 +17,13 @@ namespace Shop_HTH.Models
         public string Description { get; set; }
 
         [Required, MinLength(4, ErrorMessage = "Yêu cầu nhập Giá Sản phẩm")]
+        [Range(0.01, double.MaxValue, ErrorMessage = "Giá sản phẩm phải lớn hơn 0")]
+        [Column(TypeName = "decimal(8, 2)")]
         public decimal Price { get; set; }
+        [Required, Range(1, int.MaxValue, ErrorMessage = "Yêu cầu chọn Thương hiệu")]
 
         public int BrandId { get; set; }
+        [Required, Range(1, int.MaxValue, ErrorMessage = "Yêu cầu chọn Danh mục")]
 
         public int CategoryId { get; set; }
 
@@ -26,6 +31,10 @@ namespace Shop_HTH.Models
 
         public CategoryModel Category { get; set; }
 
-        public string Image { get; set; }
+        public string Image { get; set; } = "no-image.png";
+
+        [NotMapped]
+        [FileExtensions]
+        public IFormFile ImageUpload { get; set; }
     }
 }
