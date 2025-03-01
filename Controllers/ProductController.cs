@@ -10,6 +10,7 @@ namespace Shop_HTH.Controllers
         {
             return View();
         }
+
 		public ProductController(DataContext context)
 		{
 			_dataContext = context;
@@ -19,7 +20,7 @@ namespace Shop_HTH.Controllers
         {
             if (Id == null)
                 return  RedirectToAction("Index");
-			var productsById = _dataContext.Products.Where(c => c.CategoryId == Id).FirstOrDefault();
+			var productsById = _dataContext.Products.Where(c => c.Id == Id).FirstOrDefault();
 			return View(productsById);
         }
     }

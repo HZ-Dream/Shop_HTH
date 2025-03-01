@@ -19,8 +19,8 @@ namespace Shop_HTH.Controllers
 			if (category == null)
 				return RedirectToAction("Index");
 			var productsByCategory = _dataContext.Products.Where(c => c.CategoryId == category.Id);
-
-			return View(await productsByCategory.OrderByDescending(p => p.Id).ToListAsync());
+            ViewBag.Slug = Slug;
+            return View(await productsByCategory.OrderByDescending(p => p.Id).ToListAsync());
 		}
 	}
 }

@@ -18,8 +18,8 @@ namespace Shop_HTH.Controllers
 			if (brand == null)
 				return RedirectToAction("Index");
 			var productsByBrand = _dataContext.Products.Where(c => c.BrandId == brand.Id);
-
-			return View(await productsByBrand.OrderByDescending(p => p.Id).ToListAsync());
+			ViewBag.Slug = Slug;
+            return View(await productsByBrand.OrderByDescending(p => p.Id).ToListAsync());
 		}
 	}
 }
