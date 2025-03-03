@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -8,7 +9,8 @@ using Shop_HTH.Repository;
 namespace Shop_HTH.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class BrandController : Controller
+	[Authorize]
+	public class BrandController : Controller
     {
         private readonly DataContext _dataContext;
         public BrandController(DataContext context)

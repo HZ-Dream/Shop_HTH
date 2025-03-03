@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Shop_HTH.Models;
 
 namespace Shop_HTH.Repository
 {
-    public class DataContext : DbContext
+    public class DataContext : IdentityDbContext<AppUserModel>
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
@@ -13,5 +14,8 @@ namespace Shop_HTH.Repository
         public DbSet<ProductModel> Products { get; set; }
 
         public DbSet<CategoryModel> Categories { get; set; }
+        public DbSet<OrderModel> Orders { get; set; }
+
+        public DbSet<OrderDetails> OrderDetails { get; set; }
     }
 }
