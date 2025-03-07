@@ -37,7 +37,7 @@ namespace Shop_HTH.Controllers
 				var orderdetails = new OrderDetails();
 				orderdetails.UserName = userEmail;
 				orderdetails.OrderCode = ordercode;
-				orderdetails.ProductId = cart.ProductId;
+				orderdetails.ProductId = (int)cart.ProductId;
 				orderdetails.Price = cart.Price;
 				orderdetails.Quantity = cart.Quantity;
 				_dataContext.Add(orderdetails);

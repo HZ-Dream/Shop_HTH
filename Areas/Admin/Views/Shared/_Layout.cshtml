@@ -67,16 +67,16 @@
 						</div>
 						<div class="mainmenu pull-left">
 							<ul class="nav navbar-nav collapse navbar-collapse">
-								<li><a asp-controller="Home" asp-action="" class="active">Home</a></li>
-								<li><a asp-controller="Product" asp-action="" class="active">Products</a></li>
-								<li><a asp-controller="Category" asp-action="" class="active">Categories</a></li>
-								<li><a asp-controller="Brand" asp-action="" class="active">Brands</a></li>
-								<li><a href="404.html">404</a></li>
-								<li><a href="contact-us.html">Contact</a></li>
+								<li><a asp-area="Home" asp-controller="Home" class="active">Home</a></li>
+								<li><a asp-action="Index" asp-controller="Product">Manage Products</a></li>
+								<li><a asp-action="Index" asp-controller="Category">Manage Categories</a></li>
+								<li><a asp-action="Index" asp-controller="Brand">Manage Brands</a></li>
+								<li><a asp-action="Index" asp-controller="User">Manage Users</a></li>
+								<li><a asp-action="Index" asp-controller="Order">Manage Orders</a></li>
 							</ul>
 						</div>
 					</div>
-					<div class="col-sm-3">
+					<div class="col-sm-3"> 
 						<div class="search_box pull-right">
 							<input type="text" placeholder="Search" />
 						</div>
