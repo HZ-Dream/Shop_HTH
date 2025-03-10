@@ -22,6 +22,7 @@
 	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
 	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
 	<link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.17.2/dist/sweetalert2.min.css">
 </head><!--/head-->
 
 <body>
@@ -72,6 +73,7 @@
 								<li><a asp-action="Index" asp-controller="Category">Manage Categories</a></li>
 								<li><a asp-action="Index" asp-controller="Brand">Manage Brands</a></li>
 								<li><a asp-action="Index" asp-controller="User">Manage Users</a></li>
+								<li><a asp-action="Index" asp-controller="Role">Manage Roles</a></li>
 								<li><a asp-action="Index" asp-controller="Order">Manage Orders</a></li>
 							</ul>
 						</div>
@@ -109,6 +111,14 @@
 	<script src="~/js/jquery.prettyPhoto.js"></script>
 	<script src="~/js/main.js"></script>
     <script src="~/backend/js/site.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.17.2/dist/sweetalert2.all.min.js"></script>
+	<script>
+		$(function () {
+			var message = '@TempData["success"]';
+			if (message != '')
+				Swal.fire(message);
+		});
+	</script>
     @await RenderSectionAsync("scripts", required: false)
 </body>
 </html>

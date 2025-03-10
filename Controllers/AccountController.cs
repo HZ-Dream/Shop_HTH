@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Shop_HTH.Models;
 using Shop_HTH.Models.ViewModel;
+using Shopping_HTH.Areas.Admin.Repository;
 
 namespace Shop_HTH.Controllers
 {
@@ -9,11 +10,13 @@ namespace Shop_HTH.Controllers
 	{
 		private UserManager<AppUserModel> _userManage;
 		private SignInManager<AppUserModel> _signInManager;
-		public AccountController(SignInManager<AppUserModel> signInManager, UserManager<AppUserModel> userManage)
+		private readonly IEmailSender _emailSender;
+        public AccountController(IEmailSender emailSender,SignInManager<AppUserModel> signInManager, UserManager<AppUserModel> userManage)
 		{
 			this._userManage = userManage;
 			this._signInManager = signInManager;
-		}
+            this._emailSender = emailSender;
+        }
 		public IActionResult Login(string returnUrl)
 		{
 			return View(new LoginViewModel { ReturnUrl = returnUrl});

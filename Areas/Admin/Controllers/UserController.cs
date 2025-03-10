@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Shop_HTH.Models;
 using Shop_HTH.Repository;
+using System.Security.Claims;
 
 namespace Shop_HTH.Areas.Admin.Controllers
 {
@@ -39,6 +40,8 @@ namespace Shop_HTH.Areas.Admin.Controllers
                                         select new { User = u, RoleName = r.Name })
                                .ToListAsync();
 
+            var loggedInUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            ViewBag.loggedInUserId = loggedInUserId;
             return View(usersWithRoles);
         }
         [HttpGet]

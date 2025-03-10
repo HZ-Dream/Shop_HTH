@@ -9,7 +9,7 @@ using Shop_HTH.Repository;
 namespace Shop_HTH.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "Publisher,Author")]
+    [Authorize(Roles = "Admin,Publisher,Author")]
     public class BrandController : Controller
     {
         private readonly DataContext _dataContext;
@@ -18,9 +18,28 @@ namespace Shop_HTH.Areas.Admin.Controllers
             _dataContext = context;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int pg = 1)
         {
-            return View(await _dataContext.Brands.OrderByDescending(p => p.Id).ToListAsync());
+            List<BrandModel> brand = _dataContext.Brands.ToList(); //33 datas
+
+
+            const int pageSize = 10; //10 items/trang
+
+            if (pg < 1) //page < 1;
+            {
+                pg = 1; //page ==1
+            }
+            int recsCount = brand.Count(); //33 items;
+
+            var pager = new Paginate(recsCount, pg, pageSize);
+
+            int recSkip = (pg - 1) * pageSize; //(3 - 1) * 10; 
+
+            var data = brand.Skip(recSkip).Take(pager.PageSize).ToList();
+
+            ViewBag.Pager = pager;
+
+            return View(data);
         }
 
         public IActionResult Create()

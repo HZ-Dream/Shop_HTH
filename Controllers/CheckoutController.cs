@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Shop_HTH.Models;
 using Shop_HTH.Repository;
+using Shopping_HTH.Areas.Admin.Repository;
 using System.Security.Claims;
 
 namespace Shop_HTH.Controllers
@@ -8,13 +9,15 @@ namespace Shop_HTH.Controllers
 	public class CheckoutController : Controller
 	{
 		private readonly DataContext _dataContext;
-		public IActionResult Index()
+        private readonly IEmailSender _emailSender;
+        public IActionResult Index()
 		{
 			return View();
 		}
-		public CheckoutController(DataContext context)
+		public CheckoutController(IEmailSender emailSender, DataContext context)
 		{
 			_dataContext = context;
+			_emailSender = emailSender;
 		}
 		public async Task<IActionResult> Checkout()
 		{
@@ -44,6 +47,12 @@ namespace Shop_HTH.Controllers
 				_dataContext.SaveChanges();
 			}
 			HttpContext.Session.Remove("Cart");
+			//Send mail order when success
+			var receiver = userEmail;
+			var subject = "Đặt hàng thành công";
+			var message = "Đặt hàng thành công, trải nghiệm dịch vụ nhé.";
+
+			await _emailSender.SendEmailAsync(receiver, subject, message);
 			TempData["Success"] = "Check out thanh cong";
 			return RedirectToAction("Index","Cart");
 		}

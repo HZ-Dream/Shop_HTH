@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Shop_HTH.Models;
 using Shop_HTH.Repository;
+using Shopping_HTH.Areas.Admin.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +11,8 @@ builder.Services.AddDbContext<DataContext>(options =>
 {
     options.UseSqlServer(builder.Configuration["ConnectionStrings:ConnectedDb"]);
 });
+// Send email
+builder.Services.AddTransient<IEmailSender, EmailSender>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
