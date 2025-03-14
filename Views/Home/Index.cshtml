@@ -1,6 +1,8 @@
 ﻿@model IEnumerable<ProductModel>
+
+<partial name="_SliderPartial" />
 <div class="col-sm-3">
-    @Html.Partial("_SidebarPartial")
+	<partial name="_SidebarPartial" />
 </div>
 
 <div class="col-sm-9 padding-right">
@@ -12,16 +14,20 @@
 			<div class="col-sm-4">
 				<div class="product-image-wrapper">
 					<div class="single-products">
+
+						<div class="productinfo text-center">
 						<a asp-action="Details" asp-controller="Product" asp-route-Id="@item.Id">
-							<div class="productinfo text-center">
+							
 								<img src="~/media/products/@item.Image" alt="" />
-								<h2>@item.Price</h2>
+								<h2>@item.Price.ToString("#,##0K VNĐ")</h2>
 								<p>@item.Name</p>
 								<p>Danh mục : @item.Category.Name</p>
 								<p>Thương hiệu : @item.Brand.Name</p>
-								<a class="btn btn-default add-to-cart" asp-action="Add" asp-controller="Cart" asp-route-Id="@item.Id"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-							</div>
-						</a>
+								@* <a class="btn btn-default add-to-cart" asp-action="Add" asp-controller="Cart" asp-route-Id="@item.Id"><i class="fa fa-shopping-cart"></i>Add to cart</a> *@
+							</a>
+							<button class="btn btn-default add-to-cart" data-product_id="@item.Id"><i class="fa fa-shopping-cart"></i>Thêm giỏ hàng</button>
+						</div>
+							
 					</div>
 					
 					
@@ -37,3 +43,23 @@
 		
 	</div><!--features_items-->
 </div>
+
+@section Scripts {
+	<script>
+			$('.add-to-cart').click(function () {
+				var Id = $(this).data("product_id");
+				$.ajax({
+					type: "POST",
+					url: "@Url.Action("Add","Cart")",
+					data: { Id: Id }, 
+					success: function (result) {
+						if (result) {
+
+							Swal.fire("Thêm giỏ hàng thành công.");
+						} 
+					}
+
+				});
+			});
+	</script>
+}
