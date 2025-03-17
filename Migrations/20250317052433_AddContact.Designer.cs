@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Shop_HTH.Repository;
 
@@ -11,9 +12,11 @@ using Shop_HTH.Repository;
 namespace Shop_HTH.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20250317052433_AddContact")]
+    partial class AddContact
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -280,27 +283,6 @@ namespace Shop_HTH.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("Shop_HTH.Models.CompareModel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("Compares");
-                });
-
             modelBuilder.Entity("Shop_HTH.Models.ContactModel", b =>
                 {
                     b.Property<string>("Name")
@@ -485,27 +467,6 @@ namespace Shop_HTH.Migrations
                     b.ToTable("Sliders");
                 });
 
-            modelBuilder.Entity("Shop_HTH.Models.WishlistModel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("Wishlists");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -557,17 +518,6 @@ namespace Shop_HTH.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Shop_HTH.Models.CompareModel", b =>
-                {
-                    b.HasOne("Shop_HTH.Models.ProductModel", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Product");
-                });
-
             modelBuilder.Entity("Shop_HTH.Models.OrderDetails", b =>
                 {
                     b.HasOne("Shop_HTH.Models.ProductModel", "Product")
@@ -603,17 +553,6 @@ namespace Shop_HTH.Migrations
                     b.HasOne("Shop_HTH.Models.ProductModel", "Product")
                         .WithOne("Ratings")
                         .HasForeignKey("Shop_HTH.Models.RatingModel", "ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Product");
-                });
-
-            modelBuilder.Entity("Shop_HTH.Models.WishlistModel", b =>
-                {
-                    b.HasOne("Shop_HTH.Models.ProductModel", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

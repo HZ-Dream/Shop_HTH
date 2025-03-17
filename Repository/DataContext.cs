@@ -19,6 +19,8 @@ namespace Shop_HTH.Repository
 
         public DbSet<OrderDetails> OrderDetails { get; set; }
 		public DbSet<RatingModel> Ratings { get; set; }
-
-	}
+        public DbSet<ContactModel> Contact { get; set; }
+        public DbSet<WishlistModel> Wishlists { get; set; }
+        public DbSet<CompareModel> Compares { get; set; }
+    }
 }
