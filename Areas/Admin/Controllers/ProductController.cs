@@ -9,7 +9,7 @@ using Shop_HTH.Repository;
 namespace Shop_HTH.Areas.Admin.Controllers
 {
     [Area("Admin")]
-  /*  [Authorize(Roles = "Admin")]*/
+    [Authorize(Roles = "Admin")]
     public class ProductController : Controller
     {
         private readonly DataContext _dataContext;
@@ -27,7 +27,7 @@ namespace Shop_HTH.Areas.Admin.Controllers
 
         [HttpGet]
         public IActionResult Create()
-        
+
         {
             ViewBag.Categories = new SelectList(_dataContext.Categories, "Id", "Name");
             ViewBag.Brands = new SelectList(_dataContext.Brands, "Id", "Name");
@@ -91,7 +91,7 @@ namespace Shop_HTH.Areas.Admin.Controllers
         {
             ProductModel product = await _dataContext.Products.FindAsync(Id);
             ViewBag.Categories = new SelectList(_dataContext.Categories, "Id", "Name", product.CategoryId);
-            ViewBag.Brands = new SelectList(_dataContext.Brands, "Id", "Name", product.BrandId);    
+            ViewBag.Brands = new SelectList(_dataContext.Brands, "Id", "Name", product.BrandId);
             return View(product);
         }
 
@@ -168,7 +168,7 @@ namespace Shop_HTH.Areas.Admin.Controllers
         public async Task<IActionResult> Delete(int Id)
         {
             ProductModel product = await _dataContext.Products.FindAsync(Id);
-            if(!string.Equals(product.Image, "noimage.jpg"))
+            if (!string.Equals(product.Image, "noimage.jpg"))
             {
                 string uploadsDir = Path.Combine(_webHostEnviroment.WebRootPath, "media/products");
                 string oldfileImage = Path.Combine(uploadsDir, product.Image);
@@ -189,6 +189,39 @@ namespace Shop_HTH.Areas.Admin.Controllers
             await _dataContext.SaveChangesAsync();
             TempData["success"] = "Xoá sản phẩm thành công";
             return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> AddQuantity(int Id)
+        {
+            var productbyquantity = await _dataContext.ProductQuantities.Where(pq => pq.ProductId == Id).ToListAsync();
+            ViewBag.ProductByQuantity = productbyquantity;
+            ViewBag.Id = Id;
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult StoreProductQuantity(ProductQuantityModel productQuantityModel)
+        {
+            // Get the product to update
+            var product = _dataContext.Products.Find(productQuantityModel.ProductId);
+
+            if (product == null)
+            {
+                return NotFound(); // Handle product not found scenario
+            }
+            product.Quantity += productQuantityModel.Quantity;
+
+            productQuantityModel.Quantity = productQuantityModel.Quantity;
+            productQuantityModel.ProductId = productQuantityModel.ProductId;
+            productQuantityModel.DateCreated = DateTime.Now;
+
+
+            _dataContext.Add(productQuantityModel);
+            _dataContext.SaveChangesAsync();
+            TempData["success"] = "Thêm số lượng sản phẩm thành công";
+            return RedirectToAction("AddQuantity", "Product", new { Id = productQuantityModel.ProductId });
         }
     }
 }

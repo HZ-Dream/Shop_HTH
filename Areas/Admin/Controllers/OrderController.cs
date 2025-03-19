@@ -7,7 +7,7 @@ namespace Shop_HTH.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Route("Admin/Order")]
-    /*[Authorize(Roles = "Admin,Publisher,Author")]*/
+    [Authorize(Roles = "Admin,Publisher,Author")]
     public class OrderController : Controller
     {
         private readonly DataContext _dataContext;
@@ -28,7 +28,8 @@ namespace Shop_HTH.Areas.Admin.Controllers
                 .Where(od => od.OrderCode == ordercode).ToListAsync();
             var Order = _dataContext.Orders.Where(o => o.OrderCode == ordercode).First();
 
-            ViewBag.ShippingCost = 2000;
+            var ShippingCost = _dataContext.Orders.Where(p => p.OrderCode == ordercode).First();
+            ViewBag.ShippingCost = ShippingCost.ShippingCost;
             ViewBag.Status = Order.Status;
             return View(DetailsOrder);
         }

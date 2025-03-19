@@ -35,6 +35,9 @@ namespace Shop_HTH.Models
 
         public string Image { get; set; }
 
+        public int Quantity { get; set; }
+
+        public int Sold { get; set; }
 
         public RatingModel Ratings { get; set; }
 

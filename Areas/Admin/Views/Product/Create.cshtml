@@ -63,15 +63,29 @@
     }
     <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
     <script>
+        $("#ImageUpload").change(function () {
+            readURL(this);
+        });
+    </script>
+
+    <script>
         CKEDITOR.replace('Description', {
             versionCheck: false
         });
     </script>
 
     <script>
-        $("#ImageUpload").change(function () {
-            readURL(this);
+        $(".typing-price").on("keyup", function () {
+
+            var currency_input = $(this).val();
+
+            $("#price-convert").html(
+
+                new Intl.NumberFormat('vn-VN', { style: 'currency', currency: 'VND' }).format(
+                currency_input,
+
+                )
+            );
         });
     </script>
 }
-

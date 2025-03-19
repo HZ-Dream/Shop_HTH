@@ -7,7 +7,7 @@ using Shop_HTH.Repository;
 namespace Shop_HTH.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    /*[Authorize(Roles = "Admin")]*/
+    [Authorize(Roles = "Admin")]
     public class RoleController : Controller
     {
         private readonly DataContext _dataContext;
