@@ -4,6 +4,7 @@
 </div>
 
 <div class="col-sm-9 padding-right">
+	@Html.Partial("_FilterProductsPartial")
 	<div class="features_items">
 		<!--features_items-->
 		<h2 class="title text-center">Features Items</h2>
@@ -43,3 +44,49 @@
 
 	</div><!--features_items-->
 </div>
+@section Scripts {
+	<script>
+		$(document).ready(function () {
+
+			$("#slider-range").slider({
+
+				range: true,
+				min: 1000,
+				max: 90000,
+				step: 100,
+				values: [1000, 3000],
+				slide: function (event, ui) {
+					$("#amount").val(ui.values[0] + " kđ  - " + ui.values[1] + " kđ");
+				}
+			});
+			$("#amount").val($("#slider-range").slider("values", 0) +
+				" kđ -" + $("#slider-range").slider("values", 1) + " kđ");
+			//btn lọc giá
+			$('.btn-locgia').on('click', function () {
+
+				var url = $(this).data("current_url");
+				// alert(url);
+				if (url) {
+					window.location = url + "?startprice=" + $("#slider-range").slider("values", 0)
+						+ "&endprice=" + $("#slider-range").slider("values", 1);
+				}
+				return false;
+			});
+		});
+	</script>
+	<script type="text/javascript">
+		$(document).ready(function () {
+
+			$('#sort_by').on('change', function () {
+
+				var url = $(this).val();
+				// alert(url);
+				if (url) {
+					window.location = url;
+				}
+				return false;
+			});
+
+		});
+	</script>
+}

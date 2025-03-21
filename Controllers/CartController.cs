@@ -21,6 +21,8 @@ namespace Shop_HTH.Controllers
             var shippingPriceCookie = Request.Cookies["ShippingPrice"];
             decimal shippingPrice = 0;
 
+            var coupon_code = Request.Cookies["CouponTitle"];
+
             if (shippingPriceCookie != null)
             {
                 var shippingPriceJson = shippingPriceCookie;
@@ -31,7 +33,8 @@ namespace Shop_HTH.Controllers
             {
                 CartItems = cartItems,
                 GrandTotal = cartItems.Sum(x => x.Quantity * x.Price),
-                ShippingCost = shippingPrice
+                ShippingCost = shippingPrice,
+                CouponCode = coupon_code
             };
             return View(cartVM);
         }
@@ -177,7 +180,54 @@ namespace Shop_HTH.Controllers
             }
             return Json(new { shippingPrice });
         }
+        [HttpPost]
+        [Route("Cart/GetCoupon")]
+        public async Task<IActionResult> GetCoupon(CouponModel couponModel, string coupon_value)
+        {
+            var validCoupon = await _datacontext.Coupons
+                .FirstOrDefaultAsync(x => x.Name == coupon_value && x.Quantity >= 1);
 
+            string couponTitle = validCoupon.Name + " | " + validCoupon?.Description;
+
+            if (couponTitle != null)
+            {
+                TimeSpan remainingTime = validCoupon.DateExpired - DateTime.Now;
+                int daysRemaining = remainingTime.Days;
+
+                if (daysRemaining >= 0)
+                {
+                    try
+                    {
+                        var cookieOptions = new CookieOptions
+                        {
+                            HttpOnly = true,
+                            Expires = DateTimeOffset.UtcNow.AddMinutes(30),
+                            Secure = true,
+                            SameSite = SameSiteMode.Strict // Kiểm tra tính tương thích trình duyệt
+                        };
+
+                        Response.Cookies.Append("CouponTitle", couponTitle, cookieOptions);
+                        return Ok(new { success = true, message = "Coupon applied successfully" });
+                    }
+                    catch (Exception ex)
+                    {
+                        //trả về lỗi 
+                        Console.WriteLine($"Error adding apply coupon cookie: {ex.Message}");
+                        return Ok(new { success = false, message = "Coupon applied failed" });
+                    }
+                }
+                else
+                {
+
+                    return Ok(new { success = false, message = "Coupon has expired" });
+                }
+
+            }
+            else
+            {
+                return Ok(new { success = false, message = "Coupon not existed" });
+            }
+        }
         [HttpGet]
         [Route("Cart/DeleteShipping")]
         public IActionResult DeleteShipping()

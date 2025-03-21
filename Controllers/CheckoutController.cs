@@ -32,6 +32,7 @@ namespace Shop_HTH.Controllers
             {
                 var shippingPriceCookie = Request.Cookies["ShippingPrice"];
                 decimal shippingPrice = 0;
+                var coupon_code = Request.Cookies["CouponTitle"];
 
                 if (shippingPriceCookie != null)
                 {
@@ -43,6 +44,7 @@ namespace Shop_HTH.Controllers
                 var orderItem = new OrderModel();
                 orderItem.OrderCode = ordercode;
                 orderItem.ShippingCost = shippingPrice;
+                orderItem.CouponCode = coupon_code;   
                 orderItem.UserName = userEmail;
                 orderItem.Status = 1;
                 orderItem.CreatedDate = DateTime.Now;
@@ -74,7 +76,7 @@ namespace Shop_HTH.Controllers
 
                 await _emailSender.SendEmailAsync(receiver, subject, message);
                 TempData["Success"] = "Check out thanh cong";
-                return RedirectToAction("Index", "Cart");
+                return RedirectToAction("History", "Account");
             }
         }
     }

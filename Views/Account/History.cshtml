@@ -1,7 +1,8 @@
 ﻿@model IEnumerable<OrderModel>
 
 @{
-    ViewData["title"] = "List Order";
+    ViewData["Title"] = "List Orders History Orders placed by  " + @ViewBag.UserEmail;
+
 }
 
 <!DOCTYPE html>
@@ -9,12 +10,10 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
+   
 </head>
 <body>
-    <h3>List Order</h3>
-
-
+    <h3>List Orders History placed by: @ViewBag.UserEmail</h3>
 
     <table class="table" id="myTable">
         <thead>
@@ -22,7 +21,7 @@
                 <th>Id</th>
                 <th>Order Code</th>
                 <th>Shipping Cost</th>
-                <th>Coupon Code</th>
+                <th>Coupon</th>
                 <th>UserName</th>
                 <th>Order Status</th>
                 <th>Created Date</th>
@@ -45,19 +44,20 @@
                         }
                         else if (item.Status == 2)
                         {
-                            <span class="text text-success">Đã xử lý</span>
+                            <span class="text text-primary">Đã giao hàng</span>
                         }
                         else
                         {
-
                             <span class="text text-danger">Đã hủy</span>
-                        }
-                    </td>
+                         }
+                        </td>
                     <td>@item.CreatedDate.ToString("dd-MM-yyyy")</td>
                     <td>
-                        <a class="btn btn-warning btn-sm" asp-action="ViewOrder" asp-controller="Order" asp-route-ordercode="@item.OrderCode">View Order</a>
-                        <a class="btn btn-danger btn-sm" asp-action="Delete" asp-controller="Order" asp-route-ordercode="@item.OrderCode">Delete</a>
-
+                       @if (item.Status != 3)
+                        {
+                            <a onclick="return confirm('Bạn xác nhận muốn hủy?')" class="btn btn-danger btn-sm" asp-action="CancelOrder" asp-controller="Account" asp-route-ordercode="@item.OrderCode">Hủy đơn hàng</a>
+                        }
+                        
                     </td>
                 </tr>
             }

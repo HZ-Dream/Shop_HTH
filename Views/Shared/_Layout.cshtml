@@ -13,6 +13,7 @@
 	<link href="~/css/animate.css" rel="stylesheet">
 	<link href="~/css/main.css" rel="stylesheet">
 	<link href="~/css/responsive.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://code.jquery.com/ui/1.14.1/themes/base/jquery-ui.css">
 	<!--[if lt IE 9]>
 	<script src="js/html5shiv.js"></script>
 	<script src="js/respond.min.js"></script>
@@ -101,7 +102,15 @@
 								@if (User.Identity?.IsAuthenticated ?? false)
 								{
 									<li><a asp-controller="Account" asp-action="Logout"><i class="fa fa-sign-out"></i>Xin chào! @User.Identity.Name Logout</a></li>
-									<li><a href="#"><i class="fa fa-user"></i> Account</a></li>
+									<li class="dropdown">
+										<a style="cursor:pointer" class="dropdown-toggle" data-toggle="dropdown" >
+											<i class="fa fa-user"></i> Account <span class="caret"></span>
+										</a>
+										<ul class="dropdown-menu">
+											<li><a asp-action="History" asp-controller="Account">History Orders</a></li>
+											<li><a asp-action="UpdateAccount" asp-controller="Account">Update Account Infor</a></li>
+										</ul>
+									</li>
 									<li><a asp-action="Wishlist" asp-controller="Home"><i class="fa fa-heart"></i> Wishlist</a></li>
 									<li><a asp-action="Compare" asp-controller="Home"><i class="fa fa-star"></i> Compare</a></li>
 									<li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
@@ -271,7 +280,8 @@
 	<script src="~/js/price-range.js"></script>
 	<script src="~/js/jquery.prettyPhoto.js"></script>
 	<script src="~/js/main.js"></script>
-
+	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+	<script src="https://code.jquery.com/ui/1.14.1/jquery-ui.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 	@await RenderSectionAsync("Scripts", required: false)
