@@ -22,6 +22,8 @@ namespace Shop_HTH.Models
         [Column(TypeName = "decimal(8, 2)")]
         public decimal Price { get; set; }
 
+        [Required(ErrorMessage = "Yêu cầu nhập vốn Sản phẩm")]
+        public decimal CapitalPrice { get; set; }
         [Required, Range(1, int.MaxValue, ErrorMessage = "Yêu cầu chọn Thương hiệu")]
 
         public int BrandId { get; set; }

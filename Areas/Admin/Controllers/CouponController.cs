@@ -8,7 +8,7 @@ namespace Shop_HTH.Areas.Admin.Controllers
 {
 	[Area("Admin")]
 	[Route("Admin/Coupon")]
-	[Authorize(Roles = "Admin")]
+	//[Authorize(Roles = "Admin")]
 	public class CouponController : Controller
 	{
 		private readonly DataContext _dataContext;

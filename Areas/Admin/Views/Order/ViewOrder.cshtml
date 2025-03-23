@@ -55,19 +55,26 @@
                 <td></td>
                 <td></td>
 
-                <td>Shipping : @ViewBag.ShippingCost.ToString("#,##0 đ")</td>
-                <td>Tổng : @total.ToString("#,##0 đ")</td>
-
+                <td>@total.ToString("#,##0 VND")</td>
+                <td>Shipping cost:  @ViewBag.ShippingCost.ToString("#,##0")</td>
                 <td>
-                    @if (@ViewBag.Status != 3)
+                    @if (ViewBag.Status != 3)
                     {
                         <select class="form-control select-update-order">
-                            <option value="1">Đơn hàng mới</option>
-                            <option value="2">Đang giao hàng</option>
-                            <option value="3">Đã xử lý</option>
+                            @if (ViewBag.Status == 0)
+                            {
+                                <option disabled value="1">Đơn hàng mới</option>
+                                <option value="0">Đã xử lý</option>
+                            }
+                            else
+                            {
+                                <option value="1">Đơn hàng mới</option>
+                                <option value="0">Đã xử lý</option>
+                            }
                         </select>
                     }
                 </td>
+
             </tr>
         </tbody>
     </table>

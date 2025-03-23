@@ -131,6 +131,17 @@
                                         <p><span class="text text-danger">Tính phí vận chuyển để xác nhận đơn.</span></p>
                                     }
                                 </td>
+                                <td>
+                                    @* <form method="POST" asp-action="CreatePaymentMomo" asp-controller="Payment"> *@
+                                    @*     <input type="hidden" name="FullName" value="HTHShop" /> *@
+                                    @*     <input type="hidden" name="OrderId" value="@Guid.NewGuid().ToString()" /> *@
+                                    @*     <input type="hidden" name="Amount" value="@Model.GrandTotal" /> *@
+                                    @*     <input type="hidden" name="OrderInfo" value="Thanh toán qua MoMo Payment tại HTHShop" /> *@
+                                    @*     <button class="btn btn-danger" type="submit">Pay with MoMo</button> *@
+                                    @* </form> *@
+
+
+                                </td>
                             }
                             <td colspan="3"><a class="btn btn-danger btn-sm" asp-action="Clear" asp-controller="Cart"> Xóa tất cả </a></td>
                         </tr>

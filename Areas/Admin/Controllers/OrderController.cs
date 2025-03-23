@@ -1,13 +1,14 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Shop_HTH.Models;
 using Shop_HTH.Repository;
 
 namespace Shop_HTH.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Route("Admin/Order")]
-    [Authorize(Roles = "Admin,Publisher,Author")]
+   // [Authorize(Roles = "Admin,Publisher,Author")]
     public class OrderController : Controller
     {
         private readonly DataContext _dataContext;
@@ -46,6 +47,58 @@ namespace Shop_HTH.Areas.Admin.Controllers
             }
 
             order.Status = status;
+            _dataContext.Update(order);
+
+            if (status == 0)
+            {
+                var DetailsOrder = await _dataContext.OrderDetails
+                    .Include(od => od.Product)
+                    .Where(od => od.OrderCode == ordercode)
+                    .Select(od => new
+                    {
+                        od.Quantity,
+                        od.Product.Price,
+                        od.Product.CapitalPrice
+                    }).ToListAsync();
+
+                var statisticalModel = await _dataContext.Statisticals
+                    .FirstOrDefaultAsync(s => s.DateCreated.Date == order.CreatedDate.Date);
+
+                if (statisticalModel != null)
+                {
+                    foreach (var orderDetail in DetailsOrder)
+                    {
+                        statisticalModel.Quantity += 1;
+                        statisticalModel.Sold += orderDetail.Quantity;
+                        statisticalModel.Profit += (int)(orderDetail.Price - orderDetail.CapitalPrice);
+                    }
+
+                    _dataContext.Update(statisticalModel);
+                }
+                else
+                {
+                    int new_quantity = 0;
+                    int new_sold = 0;
+                    decimal new_profit = 0;
+
+                    foreach (var orderDetail in DetailsOrder)
+                    {
+                        new_quantity += 1;
+                        new_sold += orderDetail.Quantity;
+                        new_profit += orderDetail.Price - orderDetail.CapitalPrice;
+                    }
+
+                    statisticalModel = new StatisticalModel
+                    {
+                        DateCreated = order.CreatedDate,
+                        Quantity = new_quantity,
+                        Sold = new_sold,
+                        Profit = (int)new_profit
+                    };
+
+                    _dataContext.Add(statisticalModel);
+                }
+            }
 
             try
             {
@@ -54,11 +107,10 @@ namespace Shop_HTH.Areas.Admin.Controllers
             }
             catch (Exception)
             {
-
-
                 return StatusCode(500, "An error occurred while updating the order status.");
             }
         }
+
         [HttpGet]
         [Route("Delete")]
         public async Task<IActionResult> Delete(string ordercode)
