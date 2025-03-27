@@ -139,6 +139,16 @@ namespace Shop_HTH.Areas.Admin.Controllers
             }
         }
 
-
+        [HttpGet]
+        [Route("PaymentVnpayInfo")]
+        public async Task<IActionResult> PaymentVnpayInfo(string orderId)
+        {
+            var vnpayInfo = await _dataContext.VnInfos.FirstOrDefaultAsync(v => v.PaymentId == orderId);
+            if (vnpayInfo == null)
+            {
+                return NotFound();
+            }
+            return View(vnpayInfo);
+        }
     }
 }

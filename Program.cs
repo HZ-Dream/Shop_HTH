@@ -5,6 +5,8 @@ using Microsoft.EntityFrameworkCore;
 using Shop_HTH.Models;
 using Shop_HTH.Models.Momo;
 using Shop_HTH.Repository;
+using Shop_HTH.Services.Vnpay;
+
 //using Shop_HTH.Services.Momo;
 using Shopping_HTH.Areas.Admin.Repository;
 
@@ -12,6 +14,10 @@ var builder = WebApplication.CreateBuilder(args);
 //Momo
 //builder.Services.Configure<MomoOptionModel>(builder.Configuration.GetSection("MomoAPI"));
 //builder.Services.AddScoped<IMomoService, MomoService>();
+
+//Vnpay
+builder.Services.AddScoped<IVnPayService, VnPayService>();
+
 //Connected sql
 builder.Services.AddDbContext<DataContext>(options =>
 {

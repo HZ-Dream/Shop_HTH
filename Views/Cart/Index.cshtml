@@ -140,7 +140,15 @@
                                     @*     <button class="btn btn-danger" type="submit">Pay with MoMo</button> *@
                                     @* </form> *@
 
+                                    <form method="POST" asp-action="CreatePaymentUrlVnpay" asp-controller="Payment">
 
+                                        <input type="hidden" name="Name" value="@User.Identity.Name" />
+                                        <input type="hidden" name="Amount" value="@Model.GrandTotal" />
+                                        <input type="hidden" name="OrderDescription" value="Thanh toán qua Vnpay" />
+                                        <input type="hidden" name="OrderType" value="other" />
+
+                                        <button class="btn btn-success" type="submit">Pay with Vnpay</button>
+                                    </form>
                                 </td>
                             }
                             <td colspan="3"><a class="btn btn-danger btn-sm" asp-action="Clear" asp-controller="Cart"> Xóa tất cả </a></td>

@@ -25,6 +25,7 @@
                 <th>Coupon Code</th>
                 <th>UserName</th>
                 <th>Order Status</th>
+                <th>Payment Method</th>
                 <th>Created Date</th>
                 <th>Action</th>
             </tr>
@@ -51,6 +52,32 @@
                         {
 
                             <span class="text text-danger">Đã hủy</span>
+                        }
+                    </td>
+                    <td>
+                        @{
+                            string text = item.PaymentMethod;
+                            string textSplit = text.Split(" ")[0];
+                            string codeSplit = text.Split(" ")[1];
+                        }
+                        @if (textSplit == "COD")
+                        {
+                            <span class="text text-primary">@textSplit</span>
+                        }
+                        else
+                        {
+                            if (textSplit == "VnPay")
+                            {
+                                <a asp-controller="Order" asp-action="PaymentVnpayInfo" asp-route-orderId=@codeSplit>
+                                    <span class="text text-success">
+                                        @textSplit
+                                    </span>
+                                </a>
+                            }
+                            else if(textSplit == "MOMO")
+                            {
+                                <span class="text text-success">@text</span>
+                            }
                         }
                     </td>
                     <td>@item.CreatedDate.ToString("dd-MM-yyyy")</td>

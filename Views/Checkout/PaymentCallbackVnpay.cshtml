@@ -1,0 +1,14 @@
+﻿@using Shop_HTH.Models.Vnpay
+@model PaymentResponseModel
+
+@{
+    ViewBag.Title = "PaymentCallbackVnpay";
+}
+
+<h5>Thanh toán VnPay thành công với:</h5>
+<h6>Mã đơn hàng: @Model.OrderId</h6>
+<h6>Thông tin đơn hàng: @Model.OrderDescription</h6>
+<h6>Phương thức thanh toán: @Model.PaymentMethod</h6>
+<h6>Mã giao dịch: @Model.TransactionId</h6>
+<h6>Mã thanh toán: @Model.PaymentId</h6>
+<h5>Xem <a asp-controller="Account" asp-action="History">Lịch sử đơn hàng đã đặt</a></h5>
