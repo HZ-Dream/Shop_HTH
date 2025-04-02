@@ -20,24 +20,16 @@
 					</ol>
 
 					<div class="carousel-inner">
-
-
-
 						@foreach (var slider in ViewBag.Sliders)
 						{
 							<div class="item @(index == 0 ? "active" : "")">
 
 								<div class="col-sm-12">
-									<img src="~/media/sliders/@slider.Image" class="girl img-responsive" alt="" />
-
+									<img src="~/media/sliders/@slider.Image" style="position:relative; right: -110px; height: 400px; width: 75%;" class="girl img-responsive" alt="" />
 								</div>
 							</div>
 							index++;
 						}
-
-
-
-
 					</div>
 
 					<a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">

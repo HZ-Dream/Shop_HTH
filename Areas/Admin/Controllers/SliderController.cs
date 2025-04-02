@@ -9,8 +9,8 @@ namespace Shop_HTH.Areas.Admin.Controllers
 {
 	[Area("Admin")]
 	[Route("Admin/Slider")]
-	//[Authorize(Roles = "Publisher")]
-	public class SliderController : Controller
+    [Authorize(Roles = "Admin,Publisher")]
+    public class SliderController : Controller
 	{
 		private readonly DataContext _dataContext;
 		private readonly IWebHostEnvironment _webHostEnviroment;

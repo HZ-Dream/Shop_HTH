@@ -4,6 +4,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<style>
+    .marginBtn-TL {
+        margin-top: 10px !important;
+        margin-left: 9px !important;
+    }
+</style>
+
 <div class="row">
     <div class="col-sm-3">
         @Html.Partial("_SidebarPartial")
@@ -50,14 +57,15 @@
                         <span>US $@Model.ProductDetails.Price.ToString("#,##0K VNĐ")</span>
                         <label>Quantity: 1</label>
                         <input type="text" value="3" />
-                        @(Model.ProductDetails.Quantity == 0)
+                        @if(Model.ProductDetails.Quantity == 0)
                         {
-                            <button type="button" class="btn btn-fefault">
+                            <button type="button" class="marginBtn-TL btn btn-fefault">
                                 <i class="fa fa-shopping-cart"></i>
                                 Out of stock
                             </button>
-                        } else {
-                            <button type="button" class="btn btn-fefault cart">
+                        } else 
+                        {
+                            <button type="button" class="marginBtn-TL btn btn-fefault cart">
                                 <i class="fa fa-shopping-cart"></i>
                                 Add to cart
                             </button>
@@ -92,7 +100,7 @@
                         <div class="product-image-wrapper">
                             <div class="single-products">
                                 <div class="productinfo text-center">
-                                    <img src="images/home/gallery1.jpg" alt="" />
+                                    <img src="~/media/products/2.jpg" alt="" />
                                     <h2>$56</h2>
                                     <p>Easy Polo Black Edition</p>
                                     <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
@@ -104,7 +112,7 @@
                         <div class="product-image-wrapper">
                             <div class="single-products">
                                 <div class="productinfo text-center">
-                                    <img src="images/home/gallery3.jpg" alt="" />
+                                    <img src="~/media/products/4.jpg" alt="" />
                                     <h2>$56</h2>
                                     <p>Easy Polo Black Edition</p>
                                     <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
@@ -116,7 +124,7 @@
                         <div class="product-image-wrapper">
                             <div class="single-products">
                                 <div class="productinfo text-center">
-                                    <img src="images/home/gallery2.jpg" alt="" />
+                                    <img src="~/media/products/3.jpg" alt="" />
                                     <h2>$56</h2>
                                     <p>Easy Polo Black Edition</p>
                                     <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
@@ -128,7 +136,7 @@
                         <div class="product-image-wrapper">
                             <div class="single-products">
                                 <div class="productinfo text-center">
-                                    <img src="images/home/gallery4.jpg" alt="" />
+                                    <img src="~/media/products/1.jpg" alt="" />
                                     <h2>$56</h2>
                                     <p>Easy Polo Black Edition</p>
                                     <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
@@ -143,7 +151,7 @@
                         <div class="product-image-wrapper">
                             <div class="single-products">
                                 <div class="productinfo text-center">
-                                    <img src="images/home/gallery1.jpg" alt="" />
+                                    <img src="~/media/products/2.jpg" alt="" />
                                     <h2>$56</h2>
                                     <p>Easy Polo Black Edition</p>
                                     <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
@@ -155,7 +163,7 @@
                         <div class="product-image-wrapper">
                             <div class="single-products">
                                 <div class="productinfo text-center">
-                                    <img src="images/home/gallery2.jpg" alt="" />
+                                    <img src="~/media/products/3.jpg" alt="" />
                                     <h2>$56</h2>
                                     <p>Easy Polo Black Edition</p>
                                     <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
@@ -167,7 +175,7 @@
                         <div class="product-image-wrapper">
                             <div class="single-products">
                                 <div class="productinfo text-center">
-                                    <img src="images/home/gallery3.jpg" alt="" />
+                                    <img src="~/media/products/4.jpg" alt="" />
                                     <h2>$56</h2>
                                     <p>Easy Polo Black Edition</p>
                                     <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
@@ -179,7 +187,7 @@
                         <div class="product-image-wrapper">
                             <div class="single-products">
                                 <div class="productinfo text-center">
-                                    <img src="images/home/gallery4.jpg" alt="" />
+                                    <img src="~/media/products/1.jpg" alt="" />
                                     <h2>$56</h2>
                                     <p>Easy Polo Black Edition</p>
                                     <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>

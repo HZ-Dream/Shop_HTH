@@ -11,31 +11,39 @@
 		{
 			<div class="col-sm-4">
 				<div class="product-image-wrapper">
-					<a href="#">
-						<div class="single-products">
-							<div class="productinfo text-center">
+					<div class="single-products">
+
+						<div class="productinfo text-center">
+							<a asp-action="Details" asp-controller="Product" asp-route-Id="@item.Id">
 								<img src="~/media/products/@item.Image" alt="" />
-								<h2>@item.Price.ToString("#,##0K VNĐ")</h2>
+								<h2>@item.Price.ToString("#,##0 VNĐ")</h2>
 								<p>@item.Name</p>
 								<p>Danh mục : @item.Category.Name</p>
 								<p>Thương hiệu : @item.Brand.Name</p>
-								@if (item.Quantity == 0)
-								{
-									<button type="button" class="btn btn-default"><i class="fa fa-shopping-cart"></i>Hết hàng</button>
-								}
-								else
-								{
-									<a class="btn btn-default add-to-cart" asp-action="Add" asp-controller="Cart" asp-route-Id="@item.Id"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-								}
-							</div>
+							</a>
+							@if (@item.Quantity == 0)
+							{
+								<button type="button" class="btn btn-default"><i class="fa fa-shopping-cart"></i>Hết hàng</button>
+							}
+							else
+							{
+								<button class="btn btn-default add-to-cart" data-product_id="@item.Id"><i class="fa fa-shopping-cart"></i>Thêm giỏ hàng</button>
+							}
 						</div>
-					</a>
+
+					</div>
+
 
 					<div class="choose">
-						<ul class="nav nav-pills nav-justified">
-							<li><a href="#"><i class="fa fa-plus-square"></i>Add to wishlist</a></li>
-							<li><a href="#"><i class="fa fa-plus-square"></i>Add to compare</a></li>
-						</ul>
+						@if (User.Identity?.IsAuthenticated ?? false)
+						{
+							<ul class="nav nav-pills nav-justified">
+								<li><button class="btnLove btn add-btn-wishlist" data-product_id="@item.Id">Yêu thích</button></li>
+								<li>
+									<button class="btnCompare btn add-btn-compare" data-product_id="@item.Id">So sánh</button>
+								</li>
+							</ul>
+						}
 					</div>
 				</div>
 			</div>

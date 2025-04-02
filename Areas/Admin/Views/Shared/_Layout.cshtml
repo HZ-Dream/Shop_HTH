@@ -12,6 +12,7 @@
 	<title>@ViewData["title"] - Admin</title>
 	<link href="~/css/bootstrap.min.css" rel="stylesheet">
 	<link href="~/css/font-awesome.min.css" rel="stylesheet">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
 	<link href="~/css/prettyPhoto.css" rel="stylesheet">
 	<link href="~/css/price-range.css" rel="stylesheet">
 	<link href="~/css/animate.css" rel="stylesheet">
@@ -75,25 +76,43 @@
 						</div>
 						<div class="mainmenu pull-left">
 							<ul class="nav navbar-nav collapse navbar-collapse">
-								<li><a asp-action="index" asp-controller="Home">Homepage</a></li>
-								<li><a asp-action="index" asp-controller="Dashboard" class="active">Dashboard</a></li>
-								<li><a asp-action="Index" asp-controller="Slider"> Sliders</a></li>
-								<li><a asp-action="Index" asp-controller="Product">Products</a></li>
-								<li><a asp-action="Index" asp-controller="Shipping">Shipping</a></li>
-								<li><a asp-action="Index" asp-controller="Coupon">Coupons</a></li>
-								<li><a asp-action="Index" asp-controller="Category">Categories</a></li>
-								<li><a asp-action="Index" asp-controller="Brand">Brands</a></li>
-								<li><a asp-action="Index" asp-controller="User">Users</a></li>
-								<li><a asp-action="Index" asp-controller="Role">Roles</a></li>
-								<li><a asp-action="Index" asp-controller="Order">Orders</a></li>
-                                <li><a asp-action="Index" asp-controller="Contact">Contact</a></li>
+								<li><a href="/" class="active">Homepage</a></li>
+								<li><a asp-action="index" asp-controller="Dashboard">Dashboard</a></li>
+
+								<li class="dropdown">
+									<a href="#" class="dropdown-toggle" data-toggle="dropdown">Manage Web <b class="caret"></b></a>
+									<ul class="dropdown-menu">
+										<li></li>
+										<li><a asp-action="Index" asp-controller="Slider">Sliders</a></li>
+										<li><a asp-action="Index" asp-controller="Product">Products</a></li>
+										<li><a asp-action="Index" asp-controller="Category">Categories</a></li>
+										<li><a asp-action="Index" asp-controller="Brand">Brands</a></li>
+									</ul>
+								</li>
+
+								<li class="dropdown">
+									<a href="#" class="dropdown-toggle" data-toggle="dropdown">Manage User <b class="caret"></b></a>
+									<ul class="dropdown-menu">
+										<li></li>
+										<li><a asp-action="Index" asp-controller="User">Users</a></li>
+										<li><a asp-action="Index" asp-controller="Role">Roles</a></li>
+									</ul>
+								</li>
+
+								<li class="dropdown">
+									<a href="#" class="dropdown-toggle" data-toggle="dropdown">Manage Order <b class="caret"></b></a>
+									<ul class="dropdown-menu">
+										<li></li>
+										<li><a asp-action="Index" asp-controller="Order">Orders</a></li>
+										<li><a asp-action="Index" asp-controller="Shipping">Shipping</a></li>
+										<li><a asp-action="Index" asp-controller="Coupon">Coupons</a></li>
+									</ul>
+								</li>
+
+								<li><a asp-action="Index" asp-controller="Contact">Contact</a></li>
 							</ul>
 						</div>
-					</div>
-					<div class="col-sm-3"> 
-						<div class="search_box pull-right">
-							<input type="text" placeholder="Search" />
-						</div>
+
 					</div>
 				</div>
 			</div>

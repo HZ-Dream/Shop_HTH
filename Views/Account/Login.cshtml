@@ -2,16 +2,24 @@
 @{
     ViewData["Title"] = "Register";
 }
+
+<style>
+	.centerForm {
+		width: 70%;
+		position: relative;
+		left: 32%;
+	}
+</style>
 <section id="">
 	<!--form-->
 	<div class="container">
 		<div class="row">
-			<div class="col-sm-12 col-sm-offset-1">
+			<div style="margin-left: 0;" class="col-sm-12 col-sm-offset-1">
 				<div class="login-form">
 					<!--login form-->
-					<h2>Login to your account</h2>
+					<h2 style="text-align: center">Login to your account</h2>
 					<div asp-validation-summary="ModelOnly" class="text-danger"></div>
-					<form asp-action="Login" asp-controller="Account">
+					<form class="centerForm" asp-action="Login" asp-controller="Account">
 
 						<div class="form-group">
 							<label>Username</label>
@@ -30,7 +38,7 @@
 						<div class="form-group">
 							<button class="btn btn-primary">Login</button>
 						</div>
-						<a class="btn btn-warning" asp-action="Create" asp-controller="Account">Tạo tài khoản mới</a>
+						<a style="margin: 0 12px 12px 0;" class="btn btn-warning" asp-action="Create" asp-controller="Account">Tạo tài khoản mới</a>
 						<a asp-action="LoginByGoogle" asp-controller="Account">Login Google</a><br />
 						<a asp-action="ForgotPass" asp-controller="Account">Quên mật khẩu</a><br />
 					</form>

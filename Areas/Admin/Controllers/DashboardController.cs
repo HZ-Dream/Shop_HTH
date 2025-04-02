@@ -8,7 +8,7 @@ namespace Shop_HTH.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Route("Admin/Dashboard")]
-   // [Authorize(Roles = "Publisher,Author,Admin")]
+    [Authorize(Roles = "Publisher,Author,Admin")]
     public class DashboardController : Controller
     {
         private readonly DataContext _dataContext;

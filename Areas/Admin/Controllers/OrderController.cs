@@ -8,7 +8,7 @@ namespace Shop_HTH.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Route("Admin/Order")]
-   // [Authorize(Roles = "Admin,Publisher,Author")]
+    [Authorize(Roles = "Admin,Publisher,Author")]
     public class OrderController : Controller
     {
         private readonly DataContext _dataContext;

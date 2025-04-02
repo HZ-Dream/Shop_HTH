@@ -62,6 +62,28 @@ a#scrollUp i{
   font-size: 30px;
 }
 
+margin-btn_b13 {
+	margin-bottom: 13px;
+}
+
+.btnLove {
+	background-color: #f14747;
+	color: white;
+	margin-top: 7px;
+	margin-left: 17px;
+}
+
+.btnCompare {
+	margin-top: 8px;
+	background-color: #FE980F;
+	color: white;
+}
+
+.navbar-nav li.dropdown:hover > .dropdown-menu {
+	display: block;
+}
+
+
 
 /*************************
 *******Header CSS******
@@ -197,27 +219,29 @@ a#scrollUp i{
 }
 
 
-.shop-menu ul li a {
-  background: #FFFFFF;
-  color: #696763;
-  font-family: 'Roboto', sans-serif;
-  font-size: 14px;
-  font-weight: 300;
-  padding:0;
-  padding-right: 0;
-  margin-top: 10px;
+	.shop-menu ul li a,
+	.shop-menu-info p {
+		background: #FFFFFF;
+		color: #696763;
+		font-family: 'Roboto', sans-serif;
+		font-size: 14px;
+		font-weight: 300;
+		padding: 0;
+		padding-right: 0;
+		margin-top: 10px;
+	}
+
+.shop-menu ul li a i {
+	margin-right: 3px;
 }
 
 
-.shop-menu ul li a i{
-	margin-right:3px;
-}
-
-
-.shop-menu ul li a:hover {
-	color:#fe980f;
-	background:#fff;
-}
+		.shop-menu ul li a:hover,
+		.shop-menu-info p:hover {
+			color: #fe980f;
+			background: #fff;
+			cursor: pointer;
+		}
 
 
 .header-bottom {
@@ -884,10 +908,12 @@ h2.title {
 
 .productinfo img{
   width: 100%;
+  height: 205px;
 }
 
 .productinfo{
  position:relative;
+ margin-bottom: 13px;
 }
 
 .product-overlay {
@@ -942,20 +968,12 @@ h2.title {
 
 
 .add-to-cart {
-  background:#F5F5ED;
-  border: 0 none;
-  border-radius: 0;
-  color: #696763;
-  font-family: 'Roboto', sans-serif;
-  font-size: 15px;
-  margin-bottom: 25px;
-}
-
-.add-to-cart:hover {
-  background: #FE980F;
-  border: 0 none;
-  border-radius: 0;
-  color: #FFFFFF;
+	background: #F5F5ED;
+	border: 1px solid #cec8c8;
+	border-radius: 4px;
+	color: #696763;
+	font-family: 'Roboto', sans-serif;
+	font-size: 15px;
 }
 
 .add-to{
@@ -1150,7 +1168,7 @@ h2.title {
 
 
 #similar-product {
-  margin-top: 40px;
+  margin-top: 2px;
 }
 
 
@@ -1461,7 +1479,7 @@ h2.title {
   margin-bottom: 10px;
   outline: medium none;
   padding-left: 10px;
-  width: 100%;
+  width: 50%;
 }
 
 .login-form form span{

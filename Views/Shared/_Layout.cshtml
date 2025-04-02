@@ -27,7 +27,11 @@
 
 	<style>
 		.product-image-wrapper {
-			height: 550px
+			height: 450px
+		}
+
+		.adminHover a:hover {
+			color: #FE980F;
 		}
 	</style>
 </head><!--/head-->
@@ -44,6 +48,7 @@
 							<ul class="nav nav-pills">
 								<li><a href="#"><i class="fa fa-phone"></i> +2 95 01 88 821</a></li>
 								<li><a href="#"><i class="fa fa-envelope"></i> info@domain.com</a></li>
+								<li class="adminHover"><a href="~/Admin"><i class="fa fa-external-link"></i> admin</a></li>
 							</ul>
 						</div>
 					</div>
@@ -101,7 +106,7 @@
 								<li><a href="~/cart/index"><i class="fa fa-shopping-cart"></i> Cart</a></li>
 								@if (User.Identity?.IsAuthenticated ?? false)
 								{
-									<li><a asp-controller="Account" asp-action="Logout"><i class="fa fa-sign-out"></i>Xin chào! @User.Identity.Name Logout</a></li>
+									<li class="shop-menu-info"><p><i class="fa fa-crosshairs"></i> Xin chào! @User.Identity.Name</p></li>
 									<li class="dropdown">
 										<a style="cursor:pointer" class="dropdown-toggle" data-toggle="dropdown" >
 											<i class="fa fa-user"></i> Account <span class="caret"></span>
@@ -109,11 +114,20 @@
 										<ul class="dropdown-menu">
 											<li><a asp-action="History" asp-controller="Account">History Orders</a></li>
 											<li><a asp-action="UpdateAccount" asp-controller="Account">Update Account Infor</a></li>
+											<li><a asp-controller="Account" asp-action="Logout"><i class="fa fa-sign-out"></i> Logout</a></li>
 										</ul>
 									</li>
-									<li><a asp-action="Wishlist" asp-controller="Home"><i class="fa fa-heart"></i> Wishlist</a></li>
-									<li><a asp-action="Compare" asp-controller="Home"><i class="fa fa-star"></i> Compare</a></li>
-									<li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
+
+									<li class="dropdown">
+										<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+											<i class="fa fa-plus-circle"></i>More<b class="caret"></b>
+										</a>
+										<ul class="dropdown-menu">
+											<li><a asp-action="Wishlist" asp-controller="Home"><i class="fa fa-heart"></i> Wishlist</a></li>
+											<li><a asp-action="Compare" asp-controller="Home"><i class="fa fa-star"></i> Compare</a></li>
+										</ul>
+									</li>
+									<li><a href="checkout.html"><i class="fa fa-dollar"></i> Checkout</a></li>
 								}
 								else
 								{
@@ -194,72 +208,6 @@
 		<!--Footer-->
         <partial name="_FooterPartial" />
 
-		@* <div class="footer-widget"> *@
-		@* 	<div class="container"> *@
-		@* 		<div class="row"> *@
-		@* 			<div class="col-sm-2"> *@
-		@* 				<div class="single-widget"> *@
-		@* 					<h2>Service</h2> *@
-		@* 					<ul class="nav nav-pills nav-stacked"> *@
-		@* 						<li><a href="#">Online Help</a></li> *@
-		@* 						<li><a href="#">Contact Us</a></li> *@
-		@* 						<li><a href="#">Order Status</a></li> *@
-		@* 						<li><a href="#">Change Location</a></li> *@
-		@* 						<li><a href="#">FAQ’s</a></li> *@
-		@* 					</ul> *@
-		@* 				</div> *@
-		@* 			</div> *@
-		@* 			<div class="col-sm-2"> *@
-		@* 				<div class="single-widget"> *@
-		@* 					<h2>Quock Shop</h2> *@
-		@* 					<ul class="nav nav-pills nav-stacked"> *@
-		@* 						<li><a href="#">T-Shirt</a></li> *@
-		@* 						<li><a href="#">Mens</a></li> *@
-		@* 						<li><a href="#">Womens</a></li> *@
-		@* 						<li><a href="#">Gift Cards</a></li> *@
-		@* 						<li><a href="#">Shoes</a></li> *@
-		@* 					</ul> *@
-		@* 				</div> *@
-		@* 			</div> *@
-		@* 			<div class="col-sm-2"> *@
-		@* 				<div class="single-widget"> *@
-		@* 					<h2>Policies</h2> *@
-		@* 					<ul class="nav nav-pills nav-stacked"> *@
-		@* 						<li><a href="#">Terms of Use</a></li> *@
-		@* 						<li><a href="#">Privecy Policy</a></li> *@
-		@* 						<li><a href="#">Refund Policy</a></li> *@
-		@* 						<li><a href="#">Billing System</a></li> *@
-		@* 						<li><a href="#">Ticket System</a></li> *@
-		@* 					</ul> *@
-		@* 				</div> *@
-		@* 			</div> *@
-		@* 			<div class="col-sm-2"> *@
-		@* 				<div class="single-widget"> *@
-		@* 					<h2>About Shopper</h2> *@
-		@* 					<ul class="nav nav-pills nav-stacked"> *@
-		@* 						<li><a href="#">Company Information</a></li> *@
-		@* 						<li><a href="#">Careers</a></li> *@
-		@* 						<li><a href="#">Store Location</a></li> *@
-		@* 						<li><a href="#">Affillate Program</a></li> *@
-		@* 						<li><a href="#">Copyright</a></li> *@
-		@* 					</ul> *@
-		@* 				</div> *@
-		@* 			</div> *@
-		@* 			<div class="col-sm-3 col-sm-offset-1"> *@
-		@* 				<div class="single-widget"> *@
-		@* 					<h2>About Shopper</h2> *@
-		@* 					<form action="#" class="searchform"> *@
-		@* 						<input type="text" placeholder="Your email address" /> *@
-		@* 						<button type="submit" class="btn btn-default"><i class="fa fa-arrow-circle-o-right"></i></button> *@
-		@* 						<p>Get the most recent updates from <br />our site and be updated your self...</p> *@
-		@* 					</form> *@
-		@* 				</div> *@
-		@* 			</div> *@
-
-		@* 		</div> *@
-		@* 	</div> *@
-		@* </div> *@
-
 		<div class="footer-bottom">
 			<div class="container">
 				<div class="row">
@@ -280,10 +228,23 @@
 	<script src="~/js/price-range.js"></script>
 	<script src="~/js/jquery.prettyPhoto.js"></script>
 	<script src="~/js/main.js"></script>
-	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-	<script src="https://code.jquery.com/ui/1.14.1/jquery-ui.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script src="~/backend/js/site.js"></script>
+	<script src="//cdn.datatables.net/2.2.2/js/dataTables.min.js"></script>
+
+	<script src="https://cdn.datatables.net/buttons/3.2.2/js/dataTables.buttons.js"></script>
+	<script src="https://cdn.datatables.net/buttons/3.2.2/js/buttons.dataTables.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+	<script src="https://cdn.datatables.net/buttons/3.2.2/js/buttons.html5.min.js"></script>
+	<script src="https://cdn.datatables.net/buttons/3.2.2/js/buttons.print.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.17.2/dist/sweetalert2.all.min.js"></script>
+
+	<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
 
 	@await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
+
+

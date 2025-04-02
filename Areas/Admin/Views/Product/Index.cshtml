@@ -11,11 +11,8 @@
                 <th scope="col">Product Name</th>
                 <th scope="col">Product Quantity</th>
                 <th scope="col">Product Sold</th>
-                <th scope="col">Product Description</th>
                 <th scope="col">Product Price</th>
-                <th scope="col">Product Capital Price</th>
                 <th scope="col">Product Image</th>
-                <th scope="col">Product Slug</th>
                 <th scope="col">Product Category</th>
                 <th scope="col">Product Brand</th>
                 <th scope="col">Product Manage</th>
@@ -30,11 +27,8 @@
                     <td>@item.Name</td>
                     <td><b>@item.Quantity</b><br/><a asp-controller="Product" asp-action="AddQuantity" asp-route-Id="@item.Id">Add Quantity</a></td>
                     <td><b>@item.Sold</b></td>
-                    <td>@Html.Raw(@item.Description)</td>
                     <td>@item.Price.ToString("#,##0 VNĐ")</td>
-                    <td>@item.CapitalPrice.ToString("#,##0 VNĐ")</td>
                     <td> <img src="~/media/products/@item.Image" width="120px" height="150px" /> </td>
-                    <td>@item.Slug</td>
                     <td>@item.Category.Name</td>
                     <td>@item.Brand.Name</td>
                     <td>
